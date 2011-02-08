@@ -45,8 +45,8 @@ module ConstancyValidation
     # so you'll want to specify associations *after* +validates_constancy_of+
     # statements in your model classes.
     def validates_constancy_of(*attribute_names)
-      options = {:message =>
-                 ActiveRecord::Errors.default_error_messages[:constancy]}
+      options = {:message => I18n.translate("activerecord.errors.messages.constancy")}
+      # deprecated: options = {:message => ActiveRecord::Errors.default_error_messages[:constancy]}
       options.merge!(attribute_names.pop) if attribute_names.last.kind_of?(Hash)
       
       constant_names = base_class.instance_variable_get(:@constant_attribute_names) ||
