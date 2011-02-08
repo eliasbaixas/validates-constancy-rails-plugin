@@ -7,3 +7,5 @@ Dir.glob(File.join(File.dirname(__FILE__),
 end
 
 ActiveRecord::Base.class_eval { include ConstancyValidation }
+
+I18n.load_path << File.dirname(__FILE__) + '/validates_constancy/locale/en.yml'
