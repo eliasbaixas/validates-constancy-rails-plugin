@@ -7,7 +7,8 @@ require 'active_record'
 # models.
 module ConstancyValidation
   
-  ActiveRecord::Errors.default_error_messages[:constancy] = "can't be changed"
+  # deprecated in rails v2.3.x
+  #ActiveRecord::Errors.default_error_messages[:constancy] = "can't be changed"
   
   # The following validation is defined in the class scope of the model that
   # you're interested in validating. It offers a declarative way of specifying
