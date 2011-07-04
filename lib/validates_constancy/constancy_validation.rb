@@ -59,8 +59,13 @@ module ConstancyValidation
       
       options.merge! :on => :update
       validates_each(attribute_names, options) do |record, attribute_name, value|
-        unless value ==
-               record.instance_variable_get(:@original_attributes)[attribute_name]
+        original_value = record.instance_variable_get(:@original_attributes)[at
+        if original_value.kind_of?(ActiveSupport::TimeWithZone)
+          # Round times to seconds to avoid spurious changes
+          original_value = Time.zone.at(original_value.to_f.round)
+          value = Time.zone.at(value.to_f.round)
+        end
+        unless value == original_value
           record.errors.add attribute_name, options[:message]
         end
       end
